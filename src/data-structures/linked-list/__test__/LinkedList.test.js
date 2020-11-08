@@ -225,22 +225,30 @@ describe('LinkedList', () => {
     linkedList
       .append(1)
       .append(2)
-      .append(3);
-
-    expect(linkedList.toString()).toBe('1,2,3');
-    expect(linkedList.head.value).toBe(1);
-    expect(linkedList.tail.value).toBe(3);
+      .append(3)
+      .append(4);
 
     // Reverse linked list.
     linkedList.reverse();
-    expect(linkedList.toString()).toBe('3,2,1');
-    expect(linkedList.head.value).toBe(3);
-    expect(linkedList.tail.value).toBe(1);
+    expect(linkedList.toString()).toBe('4,3,2,1');
 
     // Reverse linked list back to initial state.
     linkedList.reverse();
-    expect(linkedList.toString()).toBe('1,2,3');
-    expect(linkedList.head.value).toBe(1);
-    expect(linkedList.tail.value).toBe(3);
+    expect(linkedList.toString()).toBe('1,2,3,4');
+  });
+
+  describe('toArray', () => {
+    it('should return an empty array if linked list is empty', () => {
+      const linkedList = new LinkedList();
+      expect(linkedList.toArray()).toEqual([]);
+    });
+
+    it('should return an array of the nodes of the linked list', () => {
+      const linkedList = new LinkedList()
+        .append(1)
+        .append(2)
+        .append(3);
+      expect(linkedList.toArray().map((el) => el.value)).toEqual([1, 2, 3]);
+    });
   });
 });
